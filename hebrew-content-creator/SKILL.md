@@ -1,39 +1,42 @@
 ---
 name: hebrew-content-creator
 description: >
-  Write native Hebrew content that sounds Israeli, not translated. Covers social media, blogs,
-  email campaigns, ad copy, product descriptions, SEO content, and UI/UX copy — all in natural
-  Israeli Hebrew with proper RTL formatting. Handles casual vs formal tone, Israeli slang,
-  gendered language, and cultural nuance. Use when writing any Hebrew content, translating to
-  Hebrew, localizing products for Israel, creating Hebrew social posts, writing Hebrew emails,
-  Hebrew SEO, or when user mentions עברית, בעברית, תרגם, תוכן, ישראלי, סושיאל.
-  Triggers on: Hebrew, עברית, Israeli, תרגם לעברית, RTL, כתוב בעברית.
+  The definitive Hebrew content skill for AI agents. Write Israeli Hebrew that sounds native —
+  not Academy Hebrew, not translated English. Covers all registers (casual to formal), audience
+  segments (secular, traditional, religious, Haredi, Russian-speaking, Arab-Israeli, Anglo),
+  platform strategies (Instagram-first Israel, LinkedIn for tech, TikTok for Gen Z), Israeli SEO
+  (low competition goldmine), email marketing (Israeli anti-spam law), ad copy, UI/UX, Hebrish
+  patterns, IDF slang, holiday calendar, and cultural intelligence. Use when writing ANY Hebrew
+  content, translating to Hebrew, localizing for Israel, creating Hebrew social posts, Hebrew SEO,
+  or when user mentions עברית, בעברית, ישראלי, תרגם, סושיאל, תוכן, שיווק.
 license: MIT
 metadata:
   author: ASD-AI
-  version: "1.0.0"
+  version: "2.0.0"
   category: content
-  tags: [hebrew, content-writing, social-media, seo, israel, rtl, localization, copywriting, translation, israeli]
+  tags: [hebrew, content-writing, social-media, seo, israel, rtl, localization, copywriting, israeli, marketing, startup-nation]
   platforms: [openclaw, claude-code, gemini-cli, codex-cli, cursor]
   homepage: https://github.com/sanada123/openclaw-skills
 ---
 
-# Hebrew Content Creator
+# Hebrew Content Creator v2
 
-**תכתוב עברית כמו ישראלי — לא כמו מילון.**
+**תכתוב עברית כמו ישראלי. לא כמו ספר לימוד, לא כמו Google Translate, לא כמו טופס ממשלתי.**
 
-AI-generated Hebrew is almost always too formal, too stiff, or obviously translated.
-Israeli Hebrew is casual, direct, and breaks grammar rules on purpose. This skill teaches
-the model how Israelis actually write online — when to be formal, when to be casual,
-what slang works, and which "mistakes" are actually correct.
+Israeli Hebrew is its own beast. It's not the Hebrew of the Bible. It's not Academy Hebrew.
+It's a living language shaped by the army, immigration waves, tech culture, and a national
+personality that values directness over politeness. This skill teaches AI models how Israelis
+actually write — with all the slang, shortcuts, Hebrish, and cultural DNA that makes content
+feel real.
 
 ## Core Philosophy
 
 ```
-ISRAELI > ACADEMY. Write how people speak, not how the Academy dictates.
-DIRECT > POLITE.   Israelis value tachles (תכלס). Get to the point.
-TONE > GRAMMAR.    A naturally flowing "wrong" sentence beats a stiff correct one.
-CULTURE > TRANSLATION. Israeli humor, references, and values — not American ones translated.
+ISRAELI > ACADEMY.     Write how 9 million people actually speak, not how the Academy prescribes.
+תכל'ס > DIPLOMATIC.    Israelis respect directness. Get to the point.
+AUTHENTIC > POLISHED.  A post that sounds like a real person beats a perfect one that sounds like a textbook.
+CULTURE > LANGUAGE.    Understanding Israel matters more than perfect grammar.
+SEGMENT > GENERALIZE.  Secular Tel Aviv ≠ Religious Bnei Brak ≠ Startup Herzliya ≠ Haifa students.
 ```
 
 ---
@@ -41,327 +44,586 @@ CULTURE > TRANSLATION. Israeli humor, references, and values — not American on
 ## When to Activate
 
 - Writing any content in Hebrew (social, blog, email, ads, product, UI)
-- Translating English content to Hebrew
-- Localizing a product/website for Israeli market
+- Translating/localizing content for Israeli market
 - Creating Hebrew SEO content
 - Writing Hebrew UI/UX copy
-- User says: עברית, בעברית, תרגם, תכתוב, ישראלי, סושיאל
+- Marketing to Israeli audience segments
+- User says: עברית, בעברית, תרגם, ישראלי, תוכן, סושיאל, שיווק
 
 ## When NOT to Use
 
-- Legal documents (requires legal Hebrew specialist)
-- Academic papers (different register entirely)
-- Ultra-orthodox (Haredi) audience (different cultural norms)
+- Legal contracts in Hebrew (requires legal specialist)
+- Academic papers (different register — use academic Hebrew conventions)
+- Ultra-orthodox (Haredi) publications (different norms — consult community expert)
+- Religious texts / Torah commentary (specialized domain)
 
 ---
 
-## 1. The Two Registers of Israeli Hebrew
+## 1. Hebrew Registers — The Full Spectrum
 
-| Register | Where | Sounds Like | Example |
-|----------|-------|-------------|---------|
-| **Casual (דיבורית)** | Social media, WhatsApp, TikTok, texts | How friends talk at a coffee shop | "אחי, זה פשוט עובד. תנסה." |
-| **Semiformal (תקנית-לייט)** | Blogs, LinkedIn, emails, product pages | Professional but human. Not stiff. | "הכלי הזה חוסך לנו שעות בשבוע." |
+Hebrew doesn't have dialects like Arabic — but it has **registers** that feel like different languages.
 
-**There is almost never a reason to use full Academy Hebrew (עברית תקנית מלאה) in marketing.**
-It sounds like a government form. Nobody talks like that. Nobody wants to read it.
+| Register | Where Used | Sounds Like | Example |
+|----------|-----------|-------------|---------|
+| **Street (רחוב)** | WhatsApp, TikTok, friends | How you talk with חבר'ה | "אחי, זה פשוט חולה. לך על זה." |
+| **Casual (דיבורית)** | Instagram, Twitter, podcasts | How you'd explain to a smart friend | "הכלי הזה חסך לי 3 שעות בשבוע. שווה." |
+| **Semiformal (תקנית-לייט)** | Blog, LinkedIn, newsletters | Professional Israeli — human, not stiff | "גילינו שהגישה הזו מכפילה את ההמרות." |
+| **Formal (תקנית)** | Corporate site, T&C, press | News anchor / government | "החברה הודיעה על השקת מוצר חדש." |
+| **Academy (אקדמית)** | Never in marketing | Textbook | "הנך מוזמן/ת להשתתף בסקר." |
 
-### The Formality Spectrum
+**Rule of thumb:**
 
 ```
-WhatsApp → Instagram → Twitter/X → Blog → LinkedIn → Email → Landing Page → Legal
-<---- Very casual                                            Very formal ---->
+WhatsApp → TikTok → Instagram Stories → Twitter/X → Instagram Feed → Blog → LinkedIn → Email → Landing Page → Corporate → Legal
+<---- רחוב                                                                                              תקנית ---->
 ```
+
+**The sweet spot for most marketing: Casual to Semiformal.** Never Academy.
+
+### Words That Reveal Register
+
+| Academy (don't use) | Israeli (use) | Why |
+|---------------------|--------------|-----|
+| אנו | אנחנו | "אנו" = government forms |
+| הינך | אתה/את | "הינך" = bank letter from 1995 |
+| לפיכך | אז / לכן | Sounds like a legal clause |
+| מאידך | מצד שני | Nobody says "מאידך" in real life |
+| ברם | אבל | Archaic. Will confuse readers. |
+| עוד יצוין כי | חשוב לדעת ש | Bureaucratic |
+| להוות | להיות | Government Hebrew |
+| באשר ל | לגבי | Simpler = better |
+| בהתאם ל | לפי | Everyone says "לפי" |
+| ננקוט | ניקח | Robotic |
 
 ---
 
-## 2. Social Media — Platform by Platform
+## 2. Audience Segments — Israel Is Not Monolithic
 
-### Twitter/X (Israel)
+### The 7 Audience Segments
 
-**The Israeli X voice:** Direct, opinionated, a bit sarcastic. Israelis on X debate, argue, share hot takes.
+| Segment | Size | Language Style | Platforms | What Resonates |
+|---------|------|---------------|-----------|---------------|
+| **Secular Tel Aviv** | ~1.5M | Hebrish, casual, progressive | Instagram, TikTok | Design, lifestyle, tech, global trends |
+| **Startup/Tech** | ~500K | English-heavy, professional | LinkedIn, Twitter/X | Metrics, growth, funding, innovation |
+| **Suburban mainstream** | ~3M | Simple Hebrew, family-oriented | Facebook, Instagram | Family, value-for-money, practical tips |
+| **Traditional (מסורתי)** | ~1.5M | Hebrew, some religious refs OK | Facebook, Instagram | Family values, holidays, community |
+| **Religious (דתי-לאומי)** | ~800K | Formal-leaning, values-driven | Facebook, WhatsApp groups | Community, values, education, Israel |
+| **Russian-speaking** | ~1M | Russian + Hebrew mix | Telegram, Odnoklassniki, VK | Direct, pragmatic, value-oriented |
+| **Arab-Israeli** | ~2M | Arabic + Hebrew mix | Facebook, Instagram, TikTok | Bilingual content, local relevance |
 
-**Hook formulas:**
-- "הדבר שאף אחד לא אומר על [topic]:"
-- "עשיתי את הטעות הזאת [X] פעמים. הנה מה שלמדתי:"
-- "תפסיקו לעשות [common thing]. תעשו את זה במקום:"
-- "השוואה: [A] מול [B]. התוצאה הפתיעה אותי."
-- "3 דברים שהלוואי שידעתי לפני [experience]:"
+### Segment × Tone Matrix
 
-**Format:**
+| Segment | Humor Style | Formality | Emoji Use | English Mix |
+|---------|------------|-----------|-----------|-------------|
+| Secular TLV | Sarcastic, self-deprecating | Very casual | Heavy 🤷‍♂️😂 | Heavy (Hebrish) |
+| Startup/Tech | Dry, data-driven | Semiformal | Moderate | Very heavy |
+| Suburban | Warm, relatable | Casual | Moderate | Light |
+| Traditional | Respectful, family-oriented | Semiformal | Light | Light |
+| Religious | Clean, values-based | Semiformal-formal | Minimal | Minimal |
+| Russian-speaking | Direct, pragmatic | Casual-semiformal | Minimal | Moderate (+ Russian) |
+| Arab-Israeli | Depends on context | Varies | Varies | Hebrew + Arabic mix |
+
+---
+
+## 3. Platform Strategy — Israel Specifics
+
+### Platform Market Share (Israel 2025-2026)
+
+| Platform | Users (Israel) | Age Skew | Best For |
+|----------|---------------|----------|----------|
+| **Instagram** | 4.2M | 18-45 | #1 for brands. Stories + Reels dominate. |
+| **Facebook** | 6.5M | 30-65+ | Still massive. Groups = goldmine. Older audience. |
+| **TikTok** | 3M+ | 13-30 | Fastest growing. Hebrew content gap = opportunity. |
+| **LinkedIn** | 2.8M | 25-55 | Tech/B2B. Israel = LinkedIn power users. |
+| **Twitter/X** | 1.5M | 25-50 | Politics, tech, news. Niche but influential. |
+| **YouTube** | 6M+ | All ages | Hebrew video content gap is enormous. |
+| **WhatsApp** | 7M+ | All ages | Not social media — but business critical. Groups, catalogs. |
+| **Telegram** | 2M+ | 25-45 | Tech community, crypto, news channels. |
+
+### Instagram (Israel's #1 Brand Platform)
+
+**Story strategy:**
 ```
-[Hook — שורה אחת חזקה]
-
-[Body — 2-3 שורות קצרות]
-
-[CTA או שאלה]
+Monday: Tip/value (text + simple graphic)
+Tuesday: Behind-the-scenes
+Wednesday: User question / poll
+Thursday: Product/service highlight
+Friday morning: Light content (pre-Shabbat mood)
+Saturday night: Motzei Shabbat engagement post
+Sunday: Motivation / fresh start
 ```
 
-**Rules:**
-- תכלס over tact — Israelis respect directness
-- Hebrew hashtags: #סטארטאפ #יזמות #טכנולוגיה #AI
-- Sarcasm works (but be careful — it's hard to read online)
-- Keep it short — Israelis have zero patience for long tweets
-
-### Instagram (Israel)
+**Reels that work in Israel:**
+- "X דברים שלמדתי מ-[experience]" — listicle format
+- "הטעות שכולם עושים ב-[topic]" — contrarian
+- "Day in the life of [role]" — behind-scenes
+- תגובה לטרנד + twist ישראלי
+- Before/after transformation
 
 **Caption structure:**
 ```
-[שורה ראשונה — הhook, נראה לפני "עוד"]
+[שורה ראשונה — hook חזק, נראה לפני "עוד"]
 
-[סיפור או ערך — 3-5 פסקאות קצרות]
+[2-4 פסקאות קצרות עם ערך]
 
-[CTA: "שמרו את הפוסט 📌" / "תייגו חבר שצריך את זה"]
+[CTA: "שמרו 📌 / שלחו לחבר / כתבו לי בDM"]
 
 .
 .
 .
-[Hashtags — 15-20, ערבוב עברית + אנגלית]
+#hashtags
 ```
 
 **Israeli Instagram hashtags:**
-- Broad: #יזמות #סטארטאפ #טכנולוגיה #ביזנס #הצלחה
-- Medium: #יזמות_ישראלית #סטארטאפ_ניישן #הייטק_ישראלי
-- Niche: #[topic specific]
-- English: #startup #entrepreneur #tech (for international reach)
-
-### TikTok / Reels (Israel)
-
-**Script:**
 ```
-שנייה 1-3: Hook (עצירת סקרול)
-"הדבר שלא מספרים לכם על [topic]..."
-
-שנייה 4-15: תוכן
-[3 נקודות מהירות, שורה לכל נקודה]
-
-שנייה 16-20: CTA
-"עקבו בשביל עוד 👆"
+Broad (5): #ישראל #תלאביב #ירושלים #חיפה #ביזנס
+Niche (5-10): #יזמות_ישראלית #סטארטאפ_ניישן #הייטק #שיווק_דיגיטלי
+Industry (5): #[your industry specific]
+English (5): #startup #marketing #israel #telaviv
+Total: 15-25 per post
 ```
 
-**Israeli TikTok rules:**
-- דיבורית only — אף אחד לא מדבר תקנית בTikTok
-- Self-deprecating humor works great in Israel
-- Army references, Israeli culture references = engagement boost
-- Hebrew text overlays: bold, large, RTL
+### Facebook (Still Massive — Don't Ignore)
 
-### LinkedIn (Israel)
+**Who's here:** 30+, parents, mainstream Israel. NOT just "boomers."
 
-**Semiformal Hebrew.** Professional but not robotic.
+**What works:**
+- Groups > Pages (Israeli Facebook groups are incredibly active)
+- Video > image > text
+- Local community content
+- Deals and promotions (Israelis love a מבצע)
+- Controversial questions get highest engagement
 
+**Top Israeli Facebook groups by niche:**
+- Real estate: "נדל"ן" groups (200K+ members each)
+- Parenting: "הורים" groups
+- Food: "מבשלים" groups
+- Tech: "הייטקיסטים" groups
+- Local city groups (every city has one)
+
+### LinkedIn (Israel = LinkedIn Power Users)
+
+Israel has one of the highest LinkedIn engagement rates globally. Tech ecosystem lives here.
+
+**Hebrew LinkedIn rules:**
+- Semiformal Hebrew, NOT English (unless targeting global)
+- Israeli LinkedIn loves: failure stories, honest takes, "what I learned" posts
+- Army service (צבא) as story background — unique to Israel, always resonates
+- "יצאתי מ-8200 / מאמ"ן / מהיחידה" = instant credibility (but don't fake it)
+- Startup failures > startup successes for engagement
+
+**Post structure:**
 ```
-[Hook — שורה ראשונה חזקה]
+[Hook — שורה אחת חזקה]
 
-[סיפור מהניסיון — 3-4 פסקאות]
+[סיפור אישי — 3-5 פסקאות קצרות]
+[כל פסקה = 1-2 שורות בלבד]
+[שורה ריקה בין פסקאות]
 
-[Takeaway מרכזי]
+[Takeaway ברור — מה למדתי]
 
-[שאלה לדיון]
+[שאלה לקהל]
 
-#הייטק #ניהול #יזמות #AI
+#הייטק #ניהול #יזמות #סטארטאפ
 ```
 
-**LinkedIn Hebrew tips:**
-- "אני" is OK — Israelis are direct, not modest on LinkedIn
-- Stories from army service (שירות צבאי) resonate strongly
-- Failure stories > success stories (Israeli culture values "מה למדת")
-- Don't use English where Hebrew works — "ניהול" not "מנג'מנט"
+### TikTok (Israel — The Gap)
+
+**The opportunity:** Hebrew TikTok content quality is LOW. Most Israeli TikTokers do entertainment.
+Business/educational TikTok in Hebrew = almost empty category.
+
+**What works:**
+- דיבורית only — תקנית = cringe on TikTok
+- Israeli humor (self-deprecation, army refs, מזרחי culture)
+- Fast editing, no filler
+- Hebrew text overlays (bold, large)
+- Trending sounds + Israeli twist
+
+**Script template:**
+```
+0-2 sec: "הדבר שלא מספרים לכם על [topic]..." (hook)
+3-12 sec: 3 נקודות מהירות (value)
+13-15 sec: "עקבו בשביל עוד טיפים 👆" (CTA)
+```
+
+### Twitter/X (Israel — Niche but Influential)
+
+- Politics + tech dominate Israeli X
+- Hebrew, casual-semiformal
+- Hot takes perform well (Israel loves a debate)
+- Media people, VCs, founders are the core audience
+- Best for personal brand in tech/startup
+
+### YouTube (Israel — Massive Untapped)
+
+- Hebrew video content is scarce in most business niches
+- "How to" videos in Hebrew rank easily
+- Competition is LOW — English content dominates, Hebrew has gaps
+- 6M+ users but very few Hebrew business creators
+- Shorts (YouTube Shorts) = TikTok-like growth potential
 
 ---
 
-## 3. Blog & SEO Content (Hebrew)
+## 4. Israeli SEO — The Goldmine
 
-### Hebrew SEO Fundamentals
+### Why Hebrew SEO is Special
 
-| Factor | What's Different |
-|--------|-----------------|
-| **Keywords** | Hebrew has gendered forms — target both: "מעצב/ת גרפי/ת" |
-| **Search behavior** | Israelis mix Hebrew + English: "AI כלים" alongside "artificial intelligence" |
-| **Nikkud (ניקוד)** | Never use in web content — makes text unreadable |
-| **Competition** | Very low in most niches — massive opportunity |
-| **Content gap** | Most high-quality content is in English — Hebrew content wins by existing |
+| Factor | Reality |
+|--------|---------|
+| **Competition** | Extremely low in most niches. Fraction of English. |
+| **Quality gap** | Most Hebrew content is thin, outdated, or translated. |
+| **Featured snippets** | Wide open. Google often has nothing good for Hebrew queries. |
+| **Voice search** | Growing fast. Israelis talk to Google in Hebrew increasingly. |
+| **Cost per click** | $0.20-1.00 average vs $2-10+ in English |
+| **Domain authority** | Small .co.il sites can rank easily |
 
-### Keyword Research (Hebrew)
+### Hebrew Keyword Research Protocol
 
+For any topic, generate all variants:
 ```
-For any topic, generate:
-1. Hebrew term: "בינה מלאכותית"
-2. Hebrew slang/short: "AI" (yes, Israelis use the English abbreviation)
-3. Mixed: "כלי AI" / "AI לעסקים"
-4. Question form: "איך להשתמש ב-AI" / "מה זה AI"
-5. Long-tail: "הכלים הכי טובים לבינה מלאכותית לעסקים קטנים 2026"
+1. Standard Hebrew: "שיווק דיגיטלי"
+2. Hebrew casual: "שיווק באינטרנט" / "פרסום ברשת"
+3. English loan: "דיגיטל מרקטינג"
+4. English (searched in Israel): "digital marketing"
+5. Mixed: "שיווק digital" / "digital marketing בעברית"
+6. Question (formal): "מה זה שיווק דיגיטלי"
+7. Question (casual): "איך עושים שיווק דיגיטלי"
+8. Long-tail: "שיווק דיגיטלי לעסקים קטנים 2026"
+9. Voice search: "תראה לי איך לעשות שיווק דיגיטלי"
+10. Comparison: "שיווק דיגיטלי מול שיווק מסורתי"
+11. Cost query: "כמה עולה שיווק דיגיטלי"
+12. Location: "שיווק דיגיטלי תל אביב" / "שיווק דיגיטלי ירושלים"
 ```
 
-### Blog Post Template (Hebrew SEO)
+### Hebrew Blog Template (SEO)
 
 ```markdown
-# [כותרת עם מילת מפתח — 50-60 תווים]
+# [כותרת — 50-60 תווים, מילת מפתח בהתחלה]
 
-**מטא תיאור:** [משפט אחד שמסכם + מילת מפתח — 120-155 תווים]
+**מטא:** [120-155 תווים, מילת מפתח + תועלת + CTA]
 
 ## מבוא (100-150 מילים)
-- התחל עם הבעיה שהקורא מכיר
-- ספר מה ילמד מהמאמר
-- מילת המפתח ב-100 המילים הראשונות
+- פתח עם הבעיה (בשפה שהקורא מזדהה איתה)
+- מה ילמד מהמאמר
+- מילת מפתח ב-100 המילים הראשונות
 
-## [כותרת H2 עם מילת מפתח משנית]
-- נקודות ברורות ותכלסיות
-- דוגמאות מהשוק הישראלי (לא אמריקאי)
-- מספרים ונתונים כשאפשר
+## [H2 עם מילת מפתח משנית]
+- נקודות תכלסיות
+- דוגמאות ישראליות (לא אמריקאיות מתורגמות!)
+- מספרים ונתונים מקומיים כשאפשר
 
-## [כותרת H2]
-[תוכן]
+## [H2 — צעדים מעשיים]
+1. צעד ראשון (ברור, ישים)
+2. צעד שני
+3. ...
 
 ## סיכום
 - 3 נקודות עיקריות
-- CTA ברור
-- שאלה לתגובות
+- CTA (הרשמה, הורדה, יצירת קשר)
 
-## שאלות נפוצות
-**ש: [שאלה נפוצה עם מילת מפתח]**
-ת: [תשובה ב-2-3 משפטים]
+## שאלות נפוצות (FAQ Schema)
+**ש: [שאלה כמו שישראלי היה שואל בגוגל]**
+ת: [תשובה ב-2-3 משפטים, תכלס]
+```
+
+### Israeli Google Behavior
+
+- Israelis search in **Hebrew + English** mixed — target both
+- "מה זה..." and "איך..." are top question prefixes
+- Many searches include English brand names in Hebrew text
+- Mobile-first (75%+ of Israeli searches are mobile)
+- Local intent is high — "...תל אביב" / "...ירושלים" / "...באזור"
+
+---
+
+## 5. Hebrish (עברית-אנגלית) — The Israeli Hybrid
+
+Israelis (especially in tech) naturally mix Hebrew and English. This isn't laziness — it's a feature.
+
+### When Hebrish Is Correct
+
+| Context | Hebrish Level | Example |
+|---------|--------------|---------|
+| Tech/startup content | Heavy | "עשינו deploy ל-production, הrun הראשון קרס" |
+| Marketing to tech audience | Medium | "ה-ROI של הקמפיין עלה ב-40%" |
+| General marketing | Light | "מוצר חדש שעושה את הLife קל יותר" |
+| Formal/corporate | None | "המוצר החדש מפשט את חייכם" |
+| Government/legal | None | Pure Hebrew |
+
+### Hebrish Rules
+
+1. **Use English for concepts without good Hebrew:** "startup", "feedback", "deadline"
+2. **Use Hebrew for words that have natural Hebrew:** "יתרון" not "אדוונטג׳"
+3. **Hebrew verbs from English roots:** "לגגל" (to Google), "לשתף" (to share) — these ARE Hebrew
+4. **Don't transliterate what has Hebrew:** "פידבק" is OK, but "קונטנט" — use "תוכן"
+5. **Company/product names stay English:** "Apple", "Google", "OpenAI" — never translate
+
+### The Hebrish Spectrum
+
+```
+"עשינו AB test ל-landing page וה-conversion rate עלה ב-30%"
+= Perfect for tech audience LinkedIn post
+
+"בדקנו שתי גרסאות של דף הנחיתה ושיעור ההמרה עלה ב-30%"
+= Same message for broader audience blog post
+
+"הצוות בחן חלופות לעמוד הייעודי ושיעור ההמרות השתפר בשלושים אחוזים"
+= Too formal. Nobody writes like this unless forced.
 ```
 
 ---
 
-## 4. Email Marketing (Hebrew)
+## 6. Email Marketing (Israel Specifics)
 
-### Subject Line Formulas
+### Israeli Anti-Spam Law (חוק הספאם)
+
+**Legal requirements (non-negotiable):**
+- ✅ Explicit opt-in required (can't add people without consent)
+- ✅ Unsubscribe link in **every** email — "הסרה מרשימת התפוצה"
+- ✅ Sender business name + address must be visible
+- ✅ Clear identification as advertising if commercial
+- ❌ Buying email lists is illegal in Israel
+- ❌ Pre-checked consent boxes don't count
+- 📌 Fine: up to ₪1,000 per recipient per violation
+
+### Subject Lines (Hebrew)
 
 | Formula | Example |
 |---------|---------|
-| **מספר + תועלת** | "5 כלים שיחסכו לך 3 שעות ביום" |
-| **שאלה** | "אתה עדיין עושה את הטעות הזאת?" |
-| **דחיפות** | "נגמר היום — 50% הנחה" |
+| **מספר + תועלת** | "5 כלים שיחסכו לך 3 שעות כל יום" |
+| **שאלה ישירה** | "עדיין עושה את הטעות הזאת?" |
+| **תכלס** | "תכלס — ככה מכפילים הכנסות" |
+| **FOMO** | "נגמר היום. 50% הנחה." |
 | **סקרנות** | "הדבר שהכי שינה לי את העסק..." |
-| **אישי** | "{שם}, יש לך 3 דקות?" |
+| **אישי** | "{שם}, יש לך דקה?" |
 
-### Email Body Template
+### Email Greeting by Audience
 
-```
-היי {שם},
+| Audience | Greeting | Closing |
+|----------|----------|---------|
+| Tech/casual | "היי {שם}," | "🤙 {שם}" or just "{שם}" |
+| Business | "שלום {שם}," | "בברכה, {שם}" |
+| Formal | "שלום רב," | "בכבוד רב, {שם}" |
+| Young/trendy | "מה קורה {שם}?" | "✌️ {שם}" |
 
-[משפט אחד שמחבר]
+### Email Timing (Israel)
 
-[הבעיה — 2-3 משפטים]
-
-[הפתרון — מה אתה מציע]
-
-[הוכחה — מספר או ציטוט לקוח]
-
-[CTA — כפתור אחד]
-
-{שם השולח}
-```
-
-**Hebrew email rules:**
-- "היי" for casual, "שלום" for formal — never "שלום רב" (too stiff for email)
-- Keep paragraphs 1-2 lines
-- One CTA
-- "הסר מרשימת התפוצה" at bottom (legally required in Israel)
-- Israeli law: must include sender business name + address
+| Day | Best Time | Why |
+|-----|-----------|-----|
+| Sunday | 9-11 AM | First workday. Fresh inbox. (Israel's Monday) |
+| Tuesday-Wednesday | 10 AM - 1 PM | Peak workweek engagement |
+| Thursday | 10-11 AM | Before weekend prep starts |
+| Friday | Avoid after 12 PM | Pre-Shabbat. People disconnect. |
+| Saturday | Never | Shabbat. Even secular Israelis are offline. |
+| Saturday night | 8-10 PM | Motzei Shabbat — people are back. |
 
 ---
 
-## 5. Ad Copy (Hebrew)
+## 7. Ad Copy (Hebrew)
 
 ### Google Ads
 
 ```
 כותרת 1 (30 תווים): [מילת מפתח + תועלת]
-כותרת 2 (30 תווים): [הצעת ערך ייחודית]
+כותרת 2 (30 תווים): [USP או הצעה]
 כותרת 3 (30 תווים): [CTA]
-תיאור (90 תווים): [הרחבה + דחיפות + CTA]
+תיאור (90 תווים): [הרחבה + proof + CTA]
 ```
 
-### Meta/Facebook Ads
-
+**Example (tech product):**
 ```
-[Hook — שורה ראשונה עוצרת סקרול]
-
-[הבעיה — 2 שורות]
-
-[הפתרון — 2 שורות]
-
-[Social proof — מספר או ציטוט]
-
-[CTA] 👇
+כותרת 1: מערכת AI שמנהלת את הצוות שלך
+כותרת 2: מוכן בחצי שעה | בלי קוד
+כותרת 3: נסו חינם היום
+תיאור: 10 סוכני AI על טלגרם. ניהול אוטומטי, דוחות בוקר, מעקב מתחרים. ללא מנוי — תשלום חד פעמי.
 ```
+
+### Meta/Facebook Ads (Hebrew)
+
+**Primary text (casual):**
+```
+[Hook — שורה שעוצרת את הסקרול]
+
+[בעיה — 1-2 שורות. כאב שהקורא מכיר]
+
+[פתרון — 1-2 שורות. מה אתה מציע]
+
+[Proof — מספר, ציטוט, לוגו]
+
+[CTA + emoji] 👇
+```
+
+### Israeli Price Psychology
+
+| Tactic | Why It Works in Israel |
+|--------|----------------------|
+| **"בלי מנוי"** | Israelis hate subscriptions. "חד פעמי" is magic. |
+| **₪ before $** | Always show shekel price for Israeli audience |
+| **"מבצע"** | Israelis love a deal. Even luxury buyers love feeling they got a deal. |
+| **"30 יום ניסיון חינם"** | Risk reversal. Israelis are skeptical shoppers. |
+| **Comparison to alternatives** | "הכלי הזה = ½ מהמחיר של [competitor]" |
 
 ---
 
-## 6. UI/UX Copy (Hebrew)
+## 8. UI/UX Copy (Hebrew)
 
-### Common Patterns
+### The Natural Israeli Version
 
-| English | ❌ Stiff Hebrew | ✅ Natural Hebrew |
-|---------|----------------|-----------------|
-| Sign up | הירשם | צור חשבון |
-| Log in | התחבר | כניסה |
-| Get started | התחל | בוא נתחיל |
-| Learn more | למד עוד | ספר לי עוד |
-| Buy now | קנה עכשיו | לרכישה |
-| Free trial | תקופת ניסיון | נסו בחינם |
-| Contact us | צור קשר | דברו איתנו |
-| Go back | חזור | חזרה |
-| Error | שגיאה | אופס, משהו השתבש |
-| Loading | טוען | רגע... |
-| Success | הצלחה | מעולה! |
-| Are you sure? | האם אתה בטוח? | בטוח? |
-| No results | אין תוצאות | לא מצאנו כלום |
+| English | ❌ Academy | ❌ Translated | ✅ Israeli |
+|---------|----------|-------------|-----------|
+| Sign up | הירשם | הרשמה | צור חשבון |
+| Log in | התחבר | כניסה למערכת | כניסה |
+| Get started | התחל | ابدأ | בוא נתחיל |
+| Learn more | למד עוד | גלה עוד | ספר לי עוד / פרטים נוספים |
+| Buy now | קנה עכשיו | רכוש עתה | לרכישה |
+| Add to cart | הוסף לסל | הוסף לעגלה | הוספה לסל |
+| Free trial | תקופת ניסיון | ניסוי חינמי | נסו בחינם |
+| Contact us | צור קשר | התקשר אלינו | דברו איתנו |
+| Go back | חזור | שוב לאחור | חזרה |
+| Error | שגיאה | אירעה שגיאה | אופס, משהו השתבש |
+| Loading | טוען | אנא המתן | רגע... |
+| Success | הצלחה | הפעולה הושלמה | מעולה! ✅ |
+| Are you sure? | האם אתה בטוח? | אנא אשר | בטוח? |
+| No results | אין תוצאות | לא נמצאו פריטים | לא מצאנו כלום 🤷 |
+| Send | שלח | העבר | שליחה |
+| Cancel | ביטול | בטל פעולה | ביטול |
+| Delete | מחק | הסר | מחיקה |
+| Save | שמור | שמירת נתונים | שמירה |
+| Share | שתף | שתף עם אחרים | שיתוף |
 
-### RTL Design Rules (Same as Arabic)
+### Microcopy (Error Messages)
 
-- Layout flips entirely
-- Directional icons flip
-- Numbers stay LTR
-- Phone numbers: LTR
-- Mixed Hebrew-English: `dir="auto"`
-- Use `direction: rtl` not just `text-align: right`
-
----
-
-## 7. Israeli Cultural Nuances
-
-| Thing | What to Know |
-|-------|-------------|
-| **Humor** | Self-deprecating, sarcastic, absurdist. Israeli humor is dark and dry. |
-| **Directness** | "תכלס" culture — Israelis respect bluntness. Don't over-cushion. |
-| **Trust** | Israelis are skeptical of marketing. Social proof > claims. |
-| **Price sensitivity** | Always show value. "למה כדאי לי" is the first question. |
-| **Army references** | Shared experience (mandatory service). Metaphors from army life work. |
-| **Jewish holidays** | Content calendar must account for: ראש השנה, יום כיפור, פסח, חנוכה, פורים |
-| **Shabbat** | Don't schedule content for Friday evening → Saturday evening. |
-| **Gender** | Hebrew is gendered. Default: masculine. Progressive brands: use both (לכם/ן) or find neutral phrasing. |
+| Situation | ❌ Formal | ✅ Israeli |
+|-----------|---------|-----------|
+| Wrong password | "הסיסמה שגויה" | "סיסמה לא נכונה. ננסה שוב?" |
+| Network error | "אירעה שגיאת תקשורת" | "אופס, אין חיבור. תבדוק אינטרנט?" |
+| Form incomplete | "נא למלא את כל שדות החובה" | "חסרים כמה פרטים — " |
+| Email invalid | "כתובת הדואר אינה תקינה" | "האימייל נראה לא תקין" |
+| Success | "הפעולה בוצעה בהצלחה" | "סבבה! 🎉" or "נשמר!" |
+| 404 | "הדף המבוקש לא נמצא" | "הדף לא נמצא. אולי חיפשת משהו אחר?" |
 
 ---
 
-## 8. Common Mistakes (Never Do These)
+## 9. IDF Slang & Cultural References
 
-| Mistake | Why | Fix |
-|---------|-----|-----|
-| Using ניקוד (vowel marks) | Makes digital text unreadable | Never use in web/social |
-| "עברית של אקדמיה" on social | Sounds robotic, pretentious | Write like people talk |
-| Translating English idioms literally | "לשבור את הקרח" works, "to hit the nail on the head" doesn't | Find Israeli equivalent or skip |
-| English words when Hebrew exists | "פידבק" is OK, "אדוונטג'" is not — "יתרון" | Use Hebrew when a common word exists |
-| Ignoring gender entirely | Hebrew is gendered — it's noticeable | Default masculine or use both forms |
-| "אנו" instead of "אנחנו" | "אנו" = government forms. Nobody uses it. | "אנחנו" always |
-| "הינך" instead of "אתה" | Same — archaic, stiff | "אתה/את" |
-| Long paragraphs | Israelis scan like everyone else | 1-2 lines per paragraph |
-| Scheduling Shabbat posts | Low engagement + culturally off | Avoid Friday eve → Saturday eve |
+Israeli culture is deeply shaped by mandatory military service. Using army slang (where appropriate) signals authenticity.
+
+### Common IDF-Origin Terms Used in Business
+
+| Term | Origin | Meaning in Business | Example |
+|------|--------|-------------------|---------|
+| **תכלס** (tachles) | General slang | Bottom line, practically | "תכלס — מה ה-ROI?" |
+| **לתחזק** (letachzek) | Maintenance | To maintain/manage | "לתחזק את המערכת" |
+| **בריף** (brief) | IDF briefing | Quick update | "תן לי בריף על הפרויקט" |
+| **דיבריף** (debrief) | IDF debriefing | Post-mortem | "נעשה דיבריף אחרי הלאנץ'" |
+| **סדר יום** | IDF schedule | Agenda | "מה סדר היום לישיבה?" |
+| **מבצע** (mivtza) | Military operation | Campaign/sale | "מבצע סוף שנה" |
+| **גיבוי** (gibuy) | Military backup | Support/backup | "יש לנו גיבוי לDB?" |
+| **כוננות** (konanut) | Military readiness | On-call | "מי בכוננות הלילה?" |
+| **חפ"ש** (hafash) | Leave from army | Time off / break | "אני בחפ"ש השבוע" |
+| **סיירת** (sayeret) | Special forces | Elite / top quality | "הצוות סיירת" (elite team) |
+
+### When to Use Army References
+
+✅ **LinkedIn** — "6 דברים שלמדתי כמפקד שעוזרים לי בניהול צוותים"
+✅ **Personal brand** — Army service = credibility in Israeli culture
+✅ **Startup content** — "גישת 8200" = innovation methodology
+
+❌ **International audience** — Won't understand
+❌ **Arab-Israeli audience** — Potentially alienating
+❌ **Formal corporate** — Keep professional
+
+---
+
+## 10. Israeli Calendar — Content Timing
+
+### Major Holidays (Content Must Account For)
+
+| Holiday | When | Duration | Content Tone | Business Impact |
+|---------|------|----------|-------------|----------------|
+| **ראש השנה** | Sep-Oct | 2 days | Celebratory, renewal | "שנה טובה" campaign. eCommerce peak. |
+| **יום כיפור** | Sep-Oct | 1 day | NO posting. Israel shuts down. | Even non-religious Israelis fast/disconnect. |
+| **סוכות** | Sep-Oct | 7 days | Festive, outdoor | Travel + home decor campaigns |
+| **חנוכה** | Nov-Dec | 8 days | Family, gifts, light | Gift campaigns. "Festival of Deals." |
+| **פורים** | Feb-Mar | 1 day | Humor! Costumes. Fun. | Creative/funny campaigns. Brands go wild. |
+| **פסח** | Mar-Apr | 7 days | Family, freedom, spring | Major cleaning/home campaigns. Food content. |
+| **יום הזיכרון** | Apr-May | 1 day | NO marketing. Sacred. | Brands that post = massive backlash. |
+| **יום העצמאות** | Apr-May | 1 day (after memorial) | Patriotic celebration | Immediately after memorial. BBQ campaigns. |
+| **שבועות** | May-Jun | 1 day | Dairy food, learning | Cheesecake recipes, educational content |
+
+### Weekly Rhythm
+
+| Day | Israeli Reality | Content Strategy |
+|-----|----------------|-----------------|
+| **Sunday** | First workday (Israel's Monday) | Fresh content, motivation, weekly plans |
+| **Monday-Wednesday** | Peak work days | Business content, tips, how-to |
+| **Thursday** | Last "full" work day | End-of-week summaries, Friday prep |
+| **Friday morning** | Half day, pre-Shabbat | Light content, feel-good, early closing |
+| **Friday afternoon** | Shabbat prep | DO NOT post. People are offline. |
+| **Saturday** | Shabbat | DO NOT post. Even secular Israelis disconnect. |
+| **Saturday night (מוצ"ש)** | Israelis come back online | Engagement peaks. Great for interactive content. |
+
+### יום כיפור & יום הזיכרון — The Two Sacred Days
+
+**These are non-negotiable:**
+- **יום כיפור:** Zero posting. Zero. The entire country shuts down. Even atheists.
+- **יום הזיכרון:** Zero marketing, zero sales, zero "happy" content. Brands that accidentally post = crisis.
+- **Transition from יום הזיכרון to יום העצמאות:** This happens in one evening. Go from mourning to celebration. Don't post celebration too early — wait until the official siren/ceremony ends.
+
+---
+
+## 11. Israeli Price & Money Culture
+
+| Pattern | Reality |
+|---------|---------|
+| **Price transparency** | Israelis expect to see the price. Hidden pricing = distrust. |
+| **Negotiation culture** | "כמה ל-10?" — even online, Israelis try to negotiate |
+| **Shekel first** | Show ₪ for Israeli audience. $ = feels foreign. |
+| **VAT (מע"מ)** | Must specify: כולל/לא כולל מע"מ. Legally required in many cases. |
+| **Installments (תשלומים)** | Israelis love "3 תשלומים ללא ריבית" — credit card installments are a national habit |
+| **"חינם"** | Most powerful word in Israeli marketing. Free shipping, free trial, free consultation. |
+
+---
+
+## 12. Common Mistakes Matrix
+
+| Mistake | Severity | Fix |
+|---------|----------|-----|
+| Using ניקוד (vowel marks) in digital content | High | Never. Makes text unreadable online. |
+| Academy register in marketing | High | Use casual/semiformal Israeli Hebrew |
+| "אנו" instead of "אנחנו" | Medium | Always "אנחנו" |
+| "הינך" instead of "אתה" | High | "אתה/את" — always |
+| Posting on Shabbat | Medium-High | No posting Friday PM → Saturday PM |
+| Marketing on יום כיפור / יום הזיכרון | Critical | ZERO activity. No exceptions. |
+| English where Hebrew exists | Medium | "יתרון" not "אדוונטג׳" |
+| Translating American idioms | Medium | Find Israeli equivalent or drop |
+| Ignoring gender | Medium | Hebrew is gendered — address it |
+| Long paragraphs | Medium | 1-2 lines max. Israelis scan. |
+| Generic "Middle Eastern" approach | High | Israel is NOT "just another ME country" |
+| Same content for all segments | Medium | Secular TLV ≠ Religious ≠ Russian-speaking |
+| Formal when audience is casual | High | Match register to audience segment |
+| Quotation marks: " " instead of ״ ״ | Low | Use Hebrew gershayim ״ ״ |
+| Forgetting anti-spam law requirements | Critical | Legal fine ₪1,000 per recipient |
 
 ---
 
 ## Output Standards
 
 When creating Hebrew content:
-- **State the register**: "Casual (דיבורית)" or "Semiformal (תקנית-לייט)"
-- **Never use nikkud** in digital content
-- **Israeli references**: Use local examples, not translated American ones
-- **Gender**: State choice (masculine default / both forms / neutral)
-- **RTL**: All output properly right-to-left
-- **Calendar-aware**: Note if content should avoid Shabbat/holidays
-- **Proofread for**: סופיות (ם/ן/ך/ף/ץ), he vs chet, quotation marks (״ not ")
+1. **State register**: "Casual (דיבורית)" or "Semiformal (תקנית-לייט)"
+2. **State audience segment**: "Secular tech audience" or "Mainstream suburban"
+3. **Never use ניקוד** in digital content
+4. **Israeli references** — local examples, not translated American ones
+5. **Gender**: State approach (masculine default / both forms / neutral phrasing)
+6. **RTL**: All output properly right-to-left
+7. **Calendar check**: Avoid Shabbat, יום כיפור, יום הזיכרון
+8. **Legal check**: Email = anti-spam compliance (unsubscribe, sender info)
+9. **Hebrish level**: Appropriate for audience (heavy for tech, light for mainstream)
+10. **Proofread for**: סופיות (ם/ן/ך/ף/ץ), גרשיים ״ ״, spacing
 
 ---
 
-*כי 9 מיליון ישראלים ראויים לתוכן שנשמע כמוהם — לא כמו Google Translate.*
+*כי 9 מיליון ישראלים ראויים לתוכן שנשמע כמוהם — לא כמו ספר לימוד של כיתה ה'.*
+
+**Contributing:** Israeli native speakers — your slang updates, cultural corrections, and segment insights are welcome.
+Open an issue or PR at [github.com/sanada123/openclaw-skills](https://github.com/sanada123/openclaw-skills).
