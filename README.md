@@ -112,14 +112,15 @@ Replace `{skill-name}` with: `arabic-content-creator`, `hebrew-content-creator`,
 
 ## Roadmap
 
-- [x] `lifestyle-optimizer` v1.0
-- [x] `arabic-content-creator` v2.0
-- [x] `hebrew-content-creator` v2.0
-- [ ] `founder-finance` — Personal finance for bootstrapped founders
-- [ ] `team-lead` — Engineering management, 1:1s, hiring, feedback
-- [ ] `startup-ops` — Legal, accounting, contracts, compliance
-- [ ] Arabic v3 — community dialect contributions
-- [ ] Hebrew v3 — more slang, more segments
+- [x] `lifestyle-optimizer` v1.0 — Productivity, energy, parenting, burnout
+- [x] `arabic-content-creator` v3.0 — 13 dialects, 16 countries, deep cultural intelligence
+- [x] `hebrew-content-creator` v3.0 — 7 segments, Israeli culture, Hebrish, IDF slang
+- [x] `founder-finance` v1.0 — Cash flow, runway, taxes (IL/US/UAE), pricing, invoicing
+- [x] `team-lead` v1.0 — 1:1s, hiring, feedback, sprints, underperformers, remote teams
+- [x] `startup-ops` v1.0 — Registration, contracts, compliance, IP, insurance
+- [ ] Arabic v4 — community dialect contributions
+- [ ] Hebrew v4 — more slang, Haredi segment, Anglo-Israeli
+- [ ] `growth-playbook` — Customer acquisition, retention, metrics
 
 **Want a skill? Found an error?** [Open an issue](https://github.com/sanada123/openclaw-skills/issues) or submit a PR.
 
