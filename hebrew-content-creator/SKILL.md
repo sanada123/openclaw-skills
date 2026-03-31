@@ -623,6 +623,11 @@ When creating Hebrew content:
 
 ---
 
+## References
+
+- `references/slang-dictionary.md` — 60+ Israeli slang terms: IDF origin, tech, social media, Gen Z (updated quarterly)
+- `references/segments-deep-dive.md` — 7 audience segments with demographics, language, platform priority, what works/fails
+
 *כי 9 מיליון ישראלים ראויים לתוכן שנשמע כמוהם — לא כמו ספר לימוד של כיתה ה'.*
 
 **Contributing:** Israeli native speakers — your slang updates, cultural corrections, and segment insights are welcome.

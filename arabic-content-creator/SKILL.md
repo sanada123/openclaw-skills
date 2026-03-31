@@ -557,6 +557,11 @@ When creating Arabic content:
 
 ---
 
+## References
+
+- `references/dialects-deep-dive.md` — Sub-dialects for Egypt, Saudi, Gulf, Levant, Iraq, Maghreb + pronunciation guide + industry-specific Arabic (tech, legal, medical)
+- `references/country-platforms.md` — Social media penetration rates, posting times, e-commerce behavior, influencer landscape per country
+
 *لأن ٤٠٠ مليون عربي يستحقون محتوى يتكلم لغتهم الحقيقية — مش لغة Google Translate.*
 
 **Contributing:** Native speakers of any Arabic dialect — your corrections and additions are welcome. 
