@@ -1,6 +1,6 @@
 # 🧠 OpenClaw Skills by ASD-AI
 
-**Agent skills that don't exist anywhere else.** Arabic content for 400M speakers. Hebrew content for 9M Israelis. Productivity systems for founders raising kids. All evidence-based, all battle-tested.
+**7 agent skills that don't exist anywhere else.** Arabic content for 400M speakers. Hebrew content for 9M Israelis. Financial OS for founders. Engineering team management. Startup legal ops. Productivity for high-performance builders. And the skill that finds all other skills. All evidence-based, all battle-tested.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-blue)](https://openclaw.ai)
@@ -73,6 +73,70 @@ Not wellness fluff — tactical protocols that work inside a 60-hour week with a
 
 ---
 
+### 💰 [founder-finance](./founder-finance/) — v1.0
+
+**The financial OS every founder needs but no one teaches.**
+
+Cash flow, runway, taxes, pricing, and invoicing — built for founders operating across Israel, the US, and the UAE.
+
+| Feature | Details |
+|---------|---------|
+| 🔥 **Burn Rate** | Real-time burn rate calculator with scenario modeling |
+| ⏱️ **Runway Alerts** | Runway tracking with early warning thresholds |
+| 🌍 **Tax Checklist** | Country-specific tax guides for IL, US, and UAE |
+| 💲 **Pricing Frameworks** | Value-based, cost-plus, and competitive pricing models |
+| 🧾 **Invoice Templates** | Professional templates per market with local compliance |
+
+---
+
+### 👥 [team-lead](./team-lead/) — v1.0
+
+**Engineering team management that actually scales.**
+
+From your first hire to a 20-person org — 1:1s, hiring, performance, sprints, and remote teams.
+
+| Feature | Details |
+|---------|---------|
+| 🤝 **1:1 Templates** | Structured agendas for weekly, monthly, and skip-level meetings |
+| 🎯 **Hiring Scorecard** | Competency-based evaluation rubric for engineering roles |
+| 📊 **Feedback Frameworks** | SBI, radical candor, and structured performance reviews |
+| 🏃 **Sprint Rituals** | Standup, retro, planning, and demo playbooks |
+| ⚠️ **Underperformer Protocol** | Step-by-step PIP process from first signal to resolution |
+
+---
+
+### 🏢 [startup-ops](./startup-ops/) — v1.0
+
+**The legal and operational foundation your startup needs to not blow up.**
+
+Company registration, contracts, compliance, IP protection, and insurance — before it becomes a crisis.
+
+| Feature | Details |
+|---------|---------|
+| 🏛️ **Company Formation** | Jurisdiction comparison + step-by-step registration guide |
+| 📄 **Contract Templates** | NDA, SAFE, service agreements, and employment contracts |
+| 🔐 **IP Protection** | Trademark, patent, and trade secret frameworks |
+| ✅ **Compliance Checklist** | GDPR, SOC 2, and market-specific regulatory requirements |
+| 🛡️ **Insurance Guide** | Coverage types, minimums, and when to get what |
+
+---
+
+### 🔍 [skill-finder](./skill-finder/) — v1.0
+
+**The skill that finds all other skills.**
+
+Multi-source skill discovery across OpenClaw, Claude Code, Codex, Cursor, Windsurf, and more — with security vetting before install.
+
+| Feature | Details |
+|---------|---------|
+| 🌐 **Multi-Source Search** | Searches ClawHub + GitHub + npm + local filesystem in parallel |
+| ⚡ **Fast** | Parallel search completes in ~1.5s |
+| 🔒 **Security Vetting** | Automatic security review before any install |
+| 📦 **Cross-Platform Install** | One command installs to any of 8 supported platforms |
+| 🧭 **Discovery** | Find skills you didn't know existed across the entire ecosystem |
+
+---
+
 ## Quick Install
 
 **OpenClaw:**
@@ -96,7 +160,16 @@ cp -r /tmp/oc-skills/{skill-name} ~/.codex/skills/
 rm -rf /tmp/oc-skills
 ```
 
-Replace `{skill-name}` with: `arabic-content-creator`, `hebrew-content-creator`, or `lifestyle-optimizer`.
+Replace `{skill-name}` with any of the 7 available skills:
+- `arabic-content-creator`
+- `hebrew-content-creator`
+- `lifestyle-optimizer`
+- `founder-finance`
+- `team-lead`
+- `startup-ops`
+- `skill-finder`
+
+> **Tip:** Install `skill-finder` first — it can discover and install all the others automatically.
 
 ---
 
@@ -108,6 +181,14 @@ Replace `{skill-name}` with: `arabic-content-creator`, `hebrew-content-creator`,
 
 **Lifestyle:** Every productivity skill is for 9-5 workers. Every parenting skill ignores that you might also be shipping code at midnight. We built for both.
 
+**Founder Finance:** VCs teach you to raise. Accelerators teach you to pitch. Nobody teaches you what to do when your burn rate doesn't match your runway.
+
+**Team Lead:** Every management book assumes you have HR, a recruiting team, and six months to hire. Most founders are managing their first team while still writing code.
+
+**Startup Ops:** Legal blowups are the #1 avoidable startup killer. Most founders google their way through contracts and incorporation — this skill gives you the playbook.
+
+**Skill Finder:** The ecosystem of AI agent skills is exploding across a dozen platforms. You shouldn't have to know where to look.
+
 ---
 
 ## Roadmap
@@ -118,6 +199,7 @@ Replace `{skill-name}` with: `arabic-content-creator`, `hebrew-content-creator`,
 - [x] `founder-finance` v1.0 — Cash flow, runway, taxes (IL/US/UAE), pricing, invoicing
 - [x] `team-lead` v1.0 — 1:1s, hiring, feedback, sprints, underperformers, remote teams
 - [x] `startup-ops` v1.0 — Registration, contracts, compliance, IP, insurance
+- [x] `skill-finder` v1.0 — Multi-source discovery, security vetting, cross-platform install
 - [ ] Arabic v4 — community dialect contributions
 - [ ] Hebrew v4 — more slang, Haredi segment, Anglo-Israeli
 - [ ] `growth-playbook` — Customer acquisition, retention, metrics
