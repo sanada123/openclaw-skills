@@ -1,9 +1,9 @@
 ---
 name: skill-finder
-description: "Use when searching for, vetting, or installing OpenClaw skills from any source — ClawHub, GitHub, npm, or local. Replaces skill-hunter with multi-source discovery, security vetting, and one-command installs."
+description: "Multi-source skill discovery for OpenClaw, Claude Code, Codex, Cursor, Windsurf, and more. Search ClawHub, GitHub, and npm — then install to every AI platform you use in one command."
 license: MIT
 metadata:
-  version: "1.0"
+  version: "2.0"
   category: utility
   author: "Atlas / ASD-AI"
   sources:
@@ -14,9 +14,9 @@ metadata:
 
 # skill-finder
 
-**Find skills everywhere. Not just ClawHub.**
+**Find skills everywhere. Install to every AI platform you use.**
 
-Multi-source skill discovery: search ClawHub, GitHub, npm, and local skills in one command. Find, vet, and install from anywhere.
+Multi-source skill discovery: search ClawHub, GitHub, npm, and local skills in one command. Find, vet, and install across OpenClaw, Claude Code, Codex, Cursor, Windsurf, and more.
 
 ---
 
@@ -48,6 +48,15 @@ skill-finder: vet telegram-bot
 
 # Install from GitHub instead of ClawHub
 skill-finder: install github:sanada123/openclaw-skills/telegram-bot
+
+# See all detected AI platforms and installed skills
+skill-finder: status
+
+# Install to a specific platform
+skill-finder: install telegram-bot --platform claude-code
+
+# Install to all detected platforms at once
+skill-finder: install telegram-bot
 ```
 
 ---
@@ -155,10 +164,10 @@ it reads are expected for this skill type. Review lines 23-31 of SKILL.md.
 
 ---
 
-### INSTALL — Install from any source
+### INSTALL — Install from any source to any platform
 
 ```bash
-# From ClawHub (default)
+# From ClawHub (default) — installs to all detected platforms
 skill-finder: install <slug>
 
 # From our GitHub skills repo
@@ -174,43 +183,85 @@ skill-finder: install local:</path/to/skill>
 skill-finder: install npm:<package-name>
 ```
 
+**`--platform` flag — target a specific platform:**
+```bash
+skill-finder: install <slug> --platform openclaw
+skill-finder: install <slug> --platform claude-code
+skill-finder: install <slug> --platform codex
+skill-finder: install <slug> --platform cursor
+skill-finder: install <slug> --platform windsurf
+skill-finder: install <slug> --platform continue
+```
+
+When `--platform` is omitted, skill-finder detects all present platforms and installs to **all of them**.
+
 **Install flow:**
 1. Fetch SKILL.md from source
 2. Auto-run VET (warn if RISKY, require `--force` to override)
-3. Copy to `~/.openclaw/skills/<skill-name>/`
-4. Confirm: "Installed skill-name → ~/.openclaw/skills/skill-name/"
+3. Detect installed platforms (or use `--platform` override)
+4. Copy to each platform's skill/rules directory
+5. Confirm: "Installed skill-name → [platform1 path], [platform2 path]"
 
 **Skip vet (not recommended):**
 ```bash
 skill-finder: install telegram-bot --no-vet
 ```
 
+**Force-install to all platforms even if some lack a skills directory:**
+```bash
+skill-finder: install telegram-bot --force --i-reviewed-it
+```
+
 ---
 
-### STATUS — Inventory of all installed skills
+### STATUS — Inventory of all platforms and installed skills
 
 ```bash
 skill-finder: status
 ```
 
-Detects and lists all skills from local skill directories (see sources.md for detection logic) with source metadata.
+Detects all installed AI platforms and lists skills found in each platform's skill directory.
 
 **Example output:**
 ```
-INSTALLED SKILLS (47 total)
+Detected platforms:
+  ✓ OpenClaw     ~/.openclaw/skills/               (23 skills)
+  ✓ Claude Code  ~/.claude/skills/                 (8 skills)
+  ✓ Codex        ~/.codex/skills/                  (5 skills)
+  ✗ Cursor       not detected
+  ✗ Windsurf     not detected
+  ✓ Local        ./skills/                         (12 skills)
 
-LOCAL (workspace):
+INSTALLED SKILLS (47 total across all platforms)
+
+OpenClaw (~/.openclaw/skills/):
   telegram-bot        v1.2   clawhub     updated 3 days ago
   n8n-workflow        v2.0   clawhub     updated 1 week ago
-  skill-finder        v1.0   local       updated today
 
-USER (~/.openclaw/skills/):
+Claude Code (~/.claude/skills/):
+  skill-finder        v2.0   local       updated today
   my-custom-tool      v1.0   local       updated 2 weeks ago
 
 Options:
-  skill-finder: status --outdated    # Show skills with updates available
-  skill-finder: status --source github   # Filter by source
+  skill-finder: status --outdated         # Show skills with updates available
+  skill-finder: status --source github    # Filter by source
+  skill-finder: status --platform cursor  # Show single platform only
 ```
+
+---
+
+## Supported Platforms
+
+| Platform | Skill/Rules Paths |
+|----------|-------------------|
+| **OpenClaw** | `~/.openclaw/skills/`, `~/.openclaw/workspace/skills/`, `$OPENCLAW_SKILLS_DIR` |
+| **Claude Code** | `~/.claude/skills/`, `./.claude/skills/`, `CLAUDE.md` in project root |
+| **Codex (OpenAI)** | `~/.codex/skills/`, `AGENTS.md` in project root |
+| **Cursor** | `~/.cursor/rules/`, `./.cursor/rules/` |
+| **Windsurf** | `~/.windsurf/rules/`, `./.windsurf/rules/` |
+| **Continue** | `~/.continue/rules/` |
+| **Aider** | `.aider.conf.yml` based conventions |
+| **Generic** | `./skills/`, `./.agents/skills/`, `~/.agents/skills/` |
 
 ---
 

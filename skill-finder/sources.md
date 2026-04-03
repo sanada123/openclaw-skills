@@ -17,45 +17,82 @@ Each source skill-finder searches, with working curl examples, auth requirements
 
 ---
 
-## Source 1: Local Workspace
+## Source 1: Local Workspace (All Platforms)
 
-**No network call required.** Scans two directories.
+**No network call required.** Scans skill/rules directories for every detected AI platform.
 
-### Paths scanned (detected automatically, cross-platform)
+### Paths scanned (detected automatically, all platforms)
 
-Local skill directories are detected at runtime — no hardcoded paths:
+Skill directories are detected at runtime across all installed platforms:
 
 ```
-~/.openclaw/skills/                  (primary — all platforms)
+# OpenClaw
+~/.openclaw/skills/                  (primary OpenClaw install)
 ~/.openclaw/workspace/skills/        (workspace install)
-$OPENCLAW_SKILLS_DIR                 (custom override — set this env var to add paths)
+$OPENCLAW_SKILLS_DIR                 (custom override)
+
+# Claude Code
+~/.claude/skills/                    (global Claude Code skills)
+./.claude/skills/                    (project-local Claude Code skills)
+
+# Codex (OpenAI)
+~/.codex/skills/                     (Codex global skills)
+
+# Cursor
+~/.cursor/rules/                     (global Cursor rules)
+./.cursor/rules/                     (project-local Cursor rules)
+
+# Windsurf
+~/.windsurf/rules/                   (global Windsurf rules)
+./.windsurf/rules/                   (project-local Windsurf rules)
+
+# Continue
+~/.continue/rules/                   (Continue dev rules)
+
+# Generic
 ./skills/                            (current working directory)
+./.agents/skills/                    (local agents directory)
+~/.agents/skills/                    (global agents directory)
 ```
 
 On Windows, `~` resolves to `%USERPROFILE%` (e.g. `C:\Users\YourName`).
 Alternatively, set `OPENCLAW_SKILLS_DIR=%APPDATA%\OpenClaw\skills` on Windows.
 
-### Curl equivalent (filesystem scan)
+### Filesystem scan (all platforms)
 
 ```bash
-# Detect skill directories dynamically
-LOCAL_DIRS=""
-[ -d "$HOME/.openclaw/skills" ] && LOCAL_DIRS="$HOME/.openclaw/skills"
-[ -d "$HOME/.openclaw/workspace/skills" ] && LOCAL_DIRS="$LOCAL_DIRS $HOME/.openclaw/workspace/skills"
-[ -n "$OPENCLAW_SKILLS_DIR" ] && LOCAL_DIRS="$LOCAL_DIRS $OPENCLAW_SKILLS_DIR"
-[ -d "./skills" ] && LOCAL_DIRS="$LOCAL_DIRS ./skills"
+# Detect all platform skill directories
+detect_skill_dirs() {
+  local dirs=()
+  [[ -d "$HOME/.openclaw/skills" ]] && dirs+=("$HOME/.openclaw/skills [openclaw]")
+  [[ -d "$HOME/.openclaw/workspace/skills" ]] && dirs+=("$HOME/.openclaw/workspace/skills [openclaw]")
+  [[ -n "$OPENCLAW_SKILLS_DIR" && -d "$OPENCLAW_SKILLS_DIR" ]] && dirs+=("$OPENCLAW_SKILLS_DIR [openclaw-custom]")
+  [[ -d "$HOME/.claude/skills" ]] && dirs+=("$HOME/.claude/skills [claude-code]")
+  [[ -d "./.claude/skills" ]] && dirs+=("./.claude/skills [claude-code-local]")
+  [[ -d "$HOME/.codex/skills" ]] && dirs+=("$HOME/.codex/skills [codex]")
+  [[ -d "$HOME/.cursor/rules" ]] && dirs+=("$HOME/.cursor/rules [cursor]")
+  [[ -d "./.cursor/rules" ]] && dirs+=("./.cursor/rules [cursor-local]")
+  [[ -d "$HOME/.windsurf/rules" ]] && dirs+=("$HOME/.windsurf/rules [windsurf]")
+  [[ -d "./.windsurf/rules" ]] && dirs+=("./.windsurf/rules [windsurf-local]")
+  [[ -d "$HOME/.continue/rules" ]] && dirs+=("$HOME/.continue/rules [continue]")
+  [[ -d "./skills" ]] && dirs+=("./skills [local]")
+  [[ -d "./.agents/skills" ]] && dirs+=("./.agents/skills [agents]")
+  [[ -d "$HOME/.agents/skills" ]] && dirs+=("$HOME/.agents/skills [agents-global]")
+  printf "%s\n" "${dirs[@]}"
+}
 
-# List all detected skills with their descriptions
-for dir in $LOCAL_DIRS; do
+# List all skills across all platforms
+detect_skill_dirs | while IFS=' ' read -r dir platform; do
+  platform="${platform//[\[\]]/}"
   for skill_dir in "$dir"/*/; do
     [ -d "$skill_dir" ] || continue
     skill_name=$(basename "$skill_dir")
     skill_md="$skill_dir/SKILL.md"
-    if [ -f "$skill_md" ]; then
-      description=$(grep -m1 '^description:' "$skill_md" 2>/dev/null \
-        | sed 's/^description: *//' | tr -d '"')
-      echo "name=$skill_name | description=$description"
-    fi
+    [ ! -f "$skill_md" ] && skill_md="$skill_dir/README.md"
+    description=""
+    [ -f "$skill_md" ] && description=$(grep -m1 '^description:' "$skill_md" 2>/dev/null \
+      | sed 's/^description: *//' | tr -d '"')
+    echo "platform=$platform | name=$skill_name | description=$description"
   done
 done
 ```
@@ -63,8 +100,9 @@ done
 ### Response shape
 
 ```
-name=telegram-bot | description=Use when sending Telegram notifications...
-name=n8n-workflow | description=Use when building n8n automation flows...
+platform=openclaw    | name=telegram-bot | description=Use when sending Telegram notifications...
+platform=claude-code | name=skill-finder | description=Multi-source skill discovery...
+platform=cursor      | name=my-rule      | description=Project coding conventions
 ```
 
 ### Notes
@@ -72,6 +110,7 @@ name=n8n-workflow | description=Use when building n8n automation flows...
 - Skills here are already installed — no install action needed
 - These always appear first in FIND results (rank 1)
 - `STATUS` command primarily uses this source
+- Cursor/Windsurf may use `.md` or `.mdc` files directly in rules directories instead of subdirectories
 
 ---
 
@@ -380,3 +419,59 @@ ls -la "$TMPDIR/"
 ```
 
 Expected total time: **~1.5 seconds** (limited by slowest responding source, not sum).
+
+---
+
+## Platform Compatibility
+
+skill-finder supports installing skills to all major AI coding platforms. Each platform has its own convention for where skills/rules live.
+
+### Supported Platforms
+
+| Platform | Slug | Global Skills Dir | Local (project) Skills Dir | Skill Format |
+|----------|------|-------------------|----------------------------|--------------|
+| **OpenClaw** | `openclaw` | `~/.openclaw/skills/` | `./skills/` (or `$OPENCLAW_SKILLS_DIR`) | `SKILL.md` + scripts |
+| **Claude Code** | `claude-code` | `~/.claude/skills/` | `./.claude/skills/` | `SKILL.md` + scripts |
+| **Codex (OpenAI)** | `codex` | `~/.codex/skills/` | `AGENTS.md` in project root | `SKILL.md` or `AGENTS.md` |
+| **Cursor** | `cursor` | `~/.cursor/rules/` | `./.cursor/rules/` | `.md` or `.mdc` rule files |
+| **Windsurf** | `windsurf` | `~/.windsurf/rules/` | `./.windsurf/rules/` | `.md` rule files |
+| **Continue** | `continue` | `~/.continue/rules/` | — | `.md` rule files |
+| **Aider** | `aider` | — | `.aider.conf.yml` conventions | Config-driven |
+| **Generic** | `local` | `~/.agents/skills/` | `./.agents/skills/` or `./skills/` | `SKILL.md` |
+
+### Detection Logic
+
+A platform is considered "installed" (and therefore a valid install target) when its skill/rules directory exists on the filesystem. Detection runs left-to-right on these conditions:
+
+```
+OpenClaw     → ~/.openclaw/skills/ exists
+Claude Code  → ~/.claude/skills/ OR ./.claude/skills/ exists
+Codex        → ~/.codex/skills/ exists OR AGENTS.md exists in project root
+Cursor       → ~/.cursor/rules/ OR ./.cursor/rules/ exists
+Windsurf     → ~/.windsurf/rules/ OR ./.windsurf/rules/ exists
+Continue     → ~/.continue/rules/ exists
+Local        → ./skills/ OR ./.agents/skills/ OR ~/.agents/skills/ exists
+```
+
+### Per-Platform Install Notes
+
+**Claude Code**: Skills installed to `~/.claude/skills/<name>/` work identically to OpenClaw. `SKILL.md` format is shared.
+
+**Codex**: Uses `AGENTS.md` convention at project root. When installing to Codex, skill-finder appends the skill's description and trigger conditions to `AGENTS.md` if it exists, or creates a skill directory at `~/.codex/skills/<name>/`.
+
+**Cursor**: Rules live as individual `.md` or `.mdc` files in the rules directory (not subdirectories). skill-finder maps `SKILL.md` → `~/.cursor/rules/<skill-name>.md`.
+
+**Windsurf**: Same convention as Cursor. Maps `SKILL.md` → `~/.windsurf/rules/<skill-name>.md`.
+
+**Continue**: Rules are `.md` files in `~/.continue/rules/`. Maps `SKILL.md` → `~/.continue/rules/<skill-name>.md`.
+
+**Aider**: Skill conventions are appended to `.aider.conf.yml` in the project directory. skill-finder reads the SKILL.md and generates a compatible config block.
+
+### Adding a custom platform path
+
+Set environment variables to extend detection:
+
+```bash
+export OPENCLAW_SKILLS_DIR="/custom/path/to/skills"   # Extra OpenClaw path
+# skill-finder will include this path in all detection and install operations
+```

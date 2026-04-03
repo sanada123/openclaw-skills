@@ -108,26 +108,58 @@ curl -s \
 
 ---
 
-### 4. Local Skills Scan
+### 4. Local Skills Scan (All Platforms)
 
 ```bash
-# Detect skill directories dynamically (cross-platform)
-LOCAL_DIRS=""
-[ -d "$HOME/.openclaw/skills" ] && LOCAL_DIRS="$HOME/.openclaw/skills"
-[ -d "$HOME/.openclaw/workspace/skills" ] && LOCAL_DIRS="$LOCAL_DIRS $HOME/.openclaw/workspace/skills"
-[ -n "$OPENCLAW_SKILLS_DIR" ] && LOCAL_DIRS="$LOCAL_DIRS $OPENCLAW_SKILLS_DIR"
-[ -d "./skills" ] && LOCAL_DIRS="$LOCAL_DIRS ./skills"
+# Detect ALL platform skill directories — multi-platform aware
+detect_skill_dirs() {
+  local dirs=()
 
-# Scan all detected directories
-for dir in $LOCAL_DIRS; do
-  ls -1d "$dir"/*/  2>/dev/null \
-    | xargs -I{} basename {} \
-    | while read skill; do
-        desc=$(grep -m1 "^description:" \
-          "$dir/$skill/SKILL.md" 2>/dev/null \
-          | sed 's/description: *//' | tr -d '"')
-        echo "{\"name\":\"$skill\",\"source\":\"local\",\"description\":\"$desc\",\"install_cmd\":\"(installed)\"}"
-      done
+  # OpenClaw
+  [[ -d "$HOME/.openclaw/skills" ]] && dirs+=("$HOME/.openclaw/skills [openclaw]")
+  [[ -d "$HOME/.openclaw/workspace/skills" ]] && dirs+=("$HOME/.openclaw/workspace/skills [openclaw]")
+  [[ -n "$OPENCLAW_SKILLS_DIR" && -d "$OPENCLAW_SKILLS_DIR" ]] && dirs+=("$OPENCLAW_SKILLS_DIR [openclaw-custom]")
+
+  # Claude Code
+  [[ -d "$HOME/.claude/skills" ]] && dirs+=("$HOME/.claude/skills [claude-code]")
+  [[ -d "./.claude/skills" ]] && dirs+=("./.claude/skills [claude-code-local]")
+
+  # Codex (OpenAI)
+  [[ -d "$HOME/.codex/skills" ]] && dirs+=("$HOME/.codex/skills [codex]")
+
+  # Cursor
+  [[ -d "$HOME/.cursor/rules" ]] && dirs+=("$HOME/.cursor/rules [cursor]")
+  [[ -d "./.cursor/rules" ]] && dirs+=("./.cursor/rules [cursor-local]")
+
+  # Windsurf
+  [[ -d "$HOME/.windsurf/rules" ]] && dirs+=("$HOME/.windsurf/rules [windsurf]")
+  [[ -d "./.windsurf/rules" ]] && dirs+=("./.windsurf/rules [windsurf-local]")
+
+  # Continue
+  [[ -d "$HOME/.continue/rules" ]] && dirs+=("$HOME/.continue/rules [continue]")
+
+  # Generic / local workspace
+  [[ -d "./skills" ]] && dirs+=("./skills [local]")
+  [[ -d "./.agents/skills" ]] && dirs+=("./.agents/skills [agents]")
+  [[ -d "$HOME/.agents/skills" ]] && dirs+=("$HOME/.agents/skills [agents-global]")
+
+  printf "%s\n" "${dirs[@]}"
+}
+
+# Scan all detected platform directories
+detect_skill_dirs | while IFS=' ' read -r dir platform; do
+  platform="${platform//[\[\]]/}"   # strip brackets
+  for skill_dir in "$dir"/*/; do
+    [ -d "$skill_dir" ] || continue
+    skill_name=$(basename "$skill_dir")
+    skill_md="$skill_dir/SKILL.md"
+    # Also support rules files (Cursor/Windsurf use .mdc or .md files directly)
+    [ ! -f "$skill_md" ] && skill_md="$skill_dir/README.md"
+    desc=""
+    [ -f "$skill_md" ] && desc=$(grep -m1 '^description:' "$skill_md" 2>/dev/null \
+      | sed 's/^description: *//' | tr -d '"')
+    echo "{\"name\":\"$skill_name\",\"source\":\"local\",\"platform\":\"$platform\",\"description\":\"$desc\",\"install_cmd\":\"(installed)\"}"
+  done
 done | jq -s '.'
 ```
 
@@ -384,6 +416,105 @@ curl -s \
 - `--max-time 3` on curl ensures we don't block
 - Treat empty/error response as `[]`
 - Log: `[skillsmp.com: unavailable, skipped]`
+
+---
+
+## Multi-Platform Install Workflow
+
+When INSTALL runs without `--platform`, skill-finder installs to **all detected platforms**.
+
+### Platform detection for install targeting
+
+```bash
+# Resolve install target directories for a given --platform value
+platform_to_dir() {
+  local platform="$1"
+  case "$platform" in
+    openclaw)      echo "${OPENCLAW_SKILLS_DIR:-$HOME/.openclaw/skills}" ;;
+    claude-code)   echo "$HOME/.claude/skills" ;;
+    codex)         echo "$HOME/.codex/skills" ;;
+    cursor)        echo "$HOME/.cursor/rules" ;;
+    windsurf)      echo "$HOME/.windsurf/rules" ;;
+    continue)      echo "$HOME/.continue/rules" ;;
+    local)         echo "./skills" ;;
+    agents)        echo "$HOME/.agents/skills" ;;
+    *)             echo "" ;;  # unknown platform — skip
+  esac
+}
+```
+
+### Install to all detected platforms
+
+```bash
+install_to_all_platforms() {
+  local skill_name="$1"
+  local skill_src_dir="$2"   # path to downloaded skill files
+
+  # Collect all target dirs from detect_skill_dirs
+  detect_skill_dirs | while IFS=' ' read -r dir platform; do
+    platform="${platform//[\[\]]/}"
+    target="$dir/$skill_name"
+    mkdir -p "$target"
+    cp -r "$skill_src_dir"/. "$target/"
+    echo "  ✓ Installed $skill_name → $target [$platform]"
+  done
+}
+```
+
+### Install to a specific platform
+
+```bash
+install_to_platform() {
+  local skill_name="$1"
+  local skill_src_dir="$2"
+  local platform="$3"
+
+  local target_base
+  target_base=$(platform_to_dir "$platform")
+
+  if [ -z "$target_base" ]; then
+    echo "  ✗ Unknown platform: $platform"
+    return 1
+  fi
+
+  if [ ! -d "$target_base" ]; then
+    echo "  ✗ Platform directory not found: $target_base ($platform not installed?)"
+    return 1
+  fi
+
+  mkdir -p "$target_base/$skill_name"
+  cp -r "$skill_src_dir"/. "$target_base/$skill_name/"
+  echo "  ✓ Installed $skill_name → $target_base/$skill_name [$platform]"
+}
+```
+
+### Example install output (auto-detect, no --platform)
+
+```
+Installing telegram-bot...
+
+VET: 7/10 REVIEW — Reads TELEGRAM_BOT_TOKEN env var. Expected for this skill type.
+
+Detected platforms:
+  ✓ OpenClaw     ~/.openclaw/skills/telegram-bot/
+  ✓ Claude Code  ~/.claude/skills/telegram-bot/
+  ✗ Codex        not installed, skipped
+  ✗ Cursor       not installed, skipped
+
+Installed telegram-bot to 2 platform(s).
+```
+
+### Platform compatibility notes per platform
+
+| Platform | Skill format expected | Notes |
+|----------|-----------------------|-------|
+| OpenClaw | `SKILL.md` + optional scripts | Primary format |
+| Claude Code | `SKILL.md` + optional scripts | Same as OpenClaw |
+| Codex | `AGENTS.md` or `SKILL.md` | May need adapter if using AGENTS.md convention |
+| Cursor | `.mdc` or `.md` rules files | Map SKILL.md → `.cursor/rules/<skill>.md` |
+| Windsurf | `.md` rules files | Map SKILL.md → `.windsurf/rules/<skill>.md` |
+| Continue | `.md` rules files | Map SKILL.md → `.continue/rules/<skill>.md` |
+| Aider | `.aider.conf.yml` entries | Append skill conventions to config |
 
 ---
 
