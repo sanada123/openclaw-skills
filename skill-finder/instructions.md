@@ -111,22 +111,24 @@ curl -s \
 ### 4. Local Skills Scan
 
 ```bash
-# Workspace skills
-ls -1d /home/node/.openclaw/workspace/skills/*/  2>/dev/null \
-  | xargs -I{} basename {} \
-  | while read skill; do
-      desc=$(grep -m1 "^description:" \
-        "/home/node/.openclaw/workspace/skills/$skill/SKILL.md" 2>/dev/null \
-        | sed 's/description: *//' | tr -d '"')
-      echo "{\"name\":\"$skill\",\"source\":\"local\",\"description\":\"$desc\",\"install_cmd\":\"(installed)\"}"
-    done | jq -s '.'
+# Detect skill directories dynamically (cross-platform)
+LOCAL_DIRS=""
+[ -d "$HOME/.openclaw/skills" ] && LOCAL_DIRS="$HOME/.openclaw/skills"
+[ -d "$HOME/.openclaw/workspace/skills" ] && LOCAL_DIRS="$LOCAL_DIRS $HOME/.openclaw/workspace/skills"
+[ -n "$OPENCLAW_SKILLS_DIR" ] && LOCAL_DIRS="$LOCAL_DIRS $OPENCLAW_SKILLS_DIR"
+[ -d "./skills" ] && LOCAL_DIRS="$LOCAL_DIRS ./skills"
 
-# User skills
-ls -1d ~/.openclaw/skills/*/  2>/dev/null \
-  | xargs -I{} basename {} \
-  | while read skill; do
-      echo "{\"name\":\"$skill\",\"source\":\"local-user\",\"install_cmd\":\"(installed)\"}"
-    done | jq -s '.'
+# Scan all detected directories
+for dir in $LOCAL_DIRS; do
+  ls -1d "$dir"/*/  2>/dev/null \
+    | xargs -I{} basename {} \
+    | while read skill; do
+        desc=$(grep -m1 "^description:" \
+          "$dir/$skill/SKILL.md" 2>/dev/null \
+          | sed 's/description: *//' | tr -d '"')
+        echo "{\"name\":\"$skill\",\"source\":\"local\",\"description\":\"$desc\",\"install_cmd\":\"(installed)\"}"
+      done
+done | jq -s '.'
 ```
 
 ---

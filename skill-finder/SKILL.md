@@ -193,7 +193,7 @@ skill-finder: install telegram-bot --no-vet
 skill-finder: status
 ```
 
-Lists all skills in `~/.openclaw/skills/` and `/home/node/.openclaw/workspace/skills/` with source metadata.
+Detects and lists all skills from local skill directories (see sources.md for detection logic) with source metadata.
 
 **Example output:**
 ```

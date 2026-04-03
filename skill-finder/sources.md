@@ -21,25 +21,42 @@ Each source skill-finder searches, with working curl examples, auth requirements
 
 **No network call required.** Scans two directories.
 
-### Paths scanned
+### Paths scanned (detected automatically, cross-platform)
+
+Local skill directories are detected at runtime — no hardcoded paths:
 
 ```
-/home/node/.openclaw/workspace/skills/   (project skills)
-~/.openclaw/skills/                       (user skills)
+~/.openclaw/skills/                  (primary — all platforms)
+~/.openclaw/workspace/skills/        (workspace install)
+$OPENCLAW_SKILLS_DIR                 (custom override — set this env var to add paths)
+./skills/                            (current working directory)
 ```
+
+On Windows, `~` resolves to `%USERPROFILE%` (e.g. `C:\Users\YourName`).
+Alternatively, set `OPENCLAW_SKILLS_DIR=%APPDATA%\OpenClaw\skills` on Windows.
 
 ### Curl equivalent (filesystem scan)
 
 ```bash
-# List all workspace skills with their descriptions
-for skill_dir in /home/node/.openclaw/workspace/skills/*/; do
-  skill_name=$(basename "$skill_dir")
-  skill_md="$skill_dir/SKILL.md"
-  if [ -f "$skill_md" ]; then
-    description=$(grep -m1 '^description:' "$skill_md" 2>/dev/null \
-      | sed 's/^description: *//' | tr -d '"')
-    echo "name=$skill_name | description=$description"
-  fi
+# Detect skill directories dynamically
+LOCAL_DIRS=""
+[ -d "$HOME/.openclaw/skills" ] && LOCAL_DIRS="$HOME/.openclaw/skills"
+[ -d "$HOME/.openclaw/workspace/skills" ] && LOCAL_DIRS="$LOCAL_DIRS $HOME/.openclaw/workspace/skills"
+[ -n "$OPENCLAW_SKILLS_DIR" ] && LOCAL_DIRS="$LOCAL_DIRS $OPENCLAW_SKILLS_DIR"
+[ -d "./skills" ] && LOCAL_DIRS="$LOCAL_DIRS ./skills"
+
+# List all detected skills with their descriptions
+for dir in $LOCAL_DIRS; do
+  for skill_dir in "$dir"/*/; do
+    [ -d "$skill_dir" ] || continue
+    skill_name=$(basename "$skill_dir")
+    skill_md="$skill_dir/SKILL.md"
+    if [ -f "$skill_md" ]; then
+      description=$(grep -m1 '^description:' "$skill_md" 2>/dev/null \
+        | sed 's/^description: *//' | tr -d '"')
+      echo "name=$skill_name | description=$description"
+    fi
+  done
 done
 ```
 
@@ -95,7 +112,7 @@ curl -s \
 
 ```bash
 SKILL_NAME="telegram-bot"
-TARGET_DIR="/home/node/.openclaw/workspace/skills/$SKILL_NAME"
+TARGET_DIR="${OPENCLAW_SKILLS_DIR:-$HOME/.openclaw/skills}/$SKILL_NAME"
 mkdir -p "$TARGET_DIR"
 
 # Get all files in the skill directory
